@@ -1,6 +1,6 @@
+import 'package:todoapp/src/features/home/domain/entities/todo_model.dart';
+
 abstract class ITodoFacade {
-  Future<void> createTodo();
-  Future<void> completedTodo();
-  Future<void> deleteTodo();
-  Future<void> updateTodo();
+  Future<List<ToDoModel>> getTodos();
+  Future<bool> completedTodo({required String id});
 }

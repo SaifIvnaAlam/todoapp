@@ -1,5 +1,10 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../home/application/Todo_cubit/todo_cubit.dart';
 import 'package:todoapp/src/core/presentation/componenets/show_error.dart';
+import 'package:todoapp/src/features/create_todo/application/create_todo_cubit/createtodo_cubit.dart';
+
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 class CreateTodoPage extends StatelessWidget {
@@ -17,8 +22,19 @@ class CreateTodoPage extends StatelessWidget {
             onPressed: () {
               _titleController.text.isEmpty
                   ? showError(
-                      context: context, message: "Title Can not be empty")
-                  : print(_titleController.text);
+                      context: context, message: "Title can not be empty")
+                  : context
+                      .read<CreatetodoCubit>()
+                      .createTodo(
+                          description: _descriptionController.text,
+                          title: _titleController.text)
+                      .then(
+                      (value) {
+                        context.read<TodoCubit>().getTodos();
+
+                        Navigator.pop(context);
+                      },
+                    );
             },
             child: const Row(
               children: [
@@ -32,11 +48,13 @@ class CreateTodoPage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 20),
-            child: Text("Date time"
-                // DateFormat('d MMMM y').format(DateTime.now().toString()),
-                ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+            child: Text(
+              DateFormat('d MMMM y').format(
+                DateTime.now(),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
@@ -49,17 +67,17 @@ class CreateTodoPage extends StatelessWidget {
                 onTapOutside: (pointerDownEvent) =>
                     FocusManager.instance.primaryFocus?.unfocus(),
                 style: const TextStyle(
-                  fontSize: 29,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
                 decoration: const InputDecoration(
                   counterText: "",
-                  fillColor: Colors.grey,
+                  fillColor: Color.fromARGB(255, 201, 199, 199),
                   filled: true,
                   border: InputBorder.none,
                   hintText: 'Title',
                   hintStyle: TextStyle(
-                      fontSize: 39,
+                      fontSize: 17,
                       fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
@@ -74,7 +92,7 @@ class CreateTodoPage extends StatelessWidget {
                 FocusManager.instance.primaryFocus?.unfocus(),
             keyboardType: TextInputType.multiline,
             style: const TextStyle(
-              fontSize: 30,
+              fontSize: 20,
               height: 2,
               fontWeight: FontWeight.w400,
               color: Colors.black,
@@ -86,7 +104,7 @@ class CreateTodoPage extends StatelessWidget {
               counterText: "",
               hintText: '   Description',
               hintStyle: TextStyle(
-                fontSize: 30,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey,
               ),
