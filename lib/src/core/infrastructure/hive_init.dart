@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:todoapp/src/core/utils/hive_box_names.dart';
 import 'package:todoapp/src/features/home/domain/entities/todo_model.dart';
 
 class InitializeHive {
@@ -13,6 +14,6 @@ class InitializeHive {
   }
 
   static Future<void> openBox() async {
-    await Hive.openBox<ToDoModel>('todos');
+    await Hive.openBox<ToDoModel>(todoBox);
   }
 }
