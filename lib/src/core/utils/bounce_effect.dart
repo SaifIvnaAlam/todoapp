@@ -8,12 +8,12 @@ class Bounce extends StatefulWidget {
   final bool haptic;
 
   const Bounce({
-    Key? key,
+    super.key,
     this.onTap,
     this.haptic = true,
     required this.child,
     this.duration = const Duration(milliseconds: 130),
-  }) : super(key: key);
+  });
 
   @override
   State<Bounce> createState() => _BounceState();
