@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void showError({
+void showSnackbar({
   required BuildContext context,
   required String message,
 }) {
