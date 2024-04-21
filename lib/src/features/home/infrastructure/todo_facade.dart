@@ -1,9 +1,10 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:todoapp/src/core/utils/hive_box_names.dart';
 import 'package:todoapp/src/features/home/domain/entities/todo_model.dart';
 import 'package:todoapp/src/features/home/domain/interface/i_todo_facade.dart';
 
 class TodoFacade implements ITodoFacade {
-  final _todoHiveBox = Hive.box<ToDoModel>('todos');
+  final _todoHiveBox = Hive.box<ToDoModel>(todoBox);
 
   @override
   Future<List<ToDoModel>> getTodos() async {
