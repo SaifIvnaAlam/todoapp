@@ -58,7 +58,7 @@ Objective: Create a simple application that allows users to manage a list of to-
 
 # Application Documentation
 
-Todo Application
+[Click to view Demo Video of the application](https://github.com/SaifIvnaAlam/todoapp/assets/73099787/9729184b-1726-4968-b185-ef4c5e882a66)
 
 ## Required Completed Features :
 
